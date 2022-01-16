@@ -16,6 +16,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './users.model';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -36,6 +37,15 @@ export class UsersController {
   @Get()
   getAllUsers() {
     return this.usersService.getAll();
+  }
+
+  @ApiOperation({ summary: 'Issue a role' })
+  @ApiResponse({ status: 200 })
+  @Roles('1')
+  @UseGuards(RolesGuard)
+  @Post('/role')
+  addRole(@Body() addRoleDto: AddRoleDto) {
+    return this.usersService.addRole(addRoleDto);
   }
 
   @ApiOperation({ summary: 'Get one user' })

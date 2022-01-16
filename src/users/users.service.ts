@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { RolesService } from '../roles/roles.service';
+import { AddRoleDto } from './dto/add-role.dto';
 
 @Injectable()
 export class UsersService {
@@ -57,5 +58,15 @@ export class UsersService {
       where: { email },
       include: { all: true },
     });
+  }
+
+  async addRole(addRoleDto: AddRoleDto) {
+    const user = await this.userRepository.findByPk(addRoleDto.userId);
+    const role = await this.rolesService.getRoleByValue(addRoleDto.value);
+    if (role && user) {
+      await user.$add('roles', role.id);
+      return addRoleDto;
+    }
+    throw new HttpException('User or role not found', HttpStatus.NOT_FOUND);
   }
 }
