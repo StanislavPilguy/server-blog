@@ -4,30 +4,26 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RolesService } from '../roles/roles.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectModel(User)
     private userRepository: typeof User,
+    private rolesService: RolesService,
   ) {}
 
   async create(userDto: CreateUserDto) {
-    try {
-      const user = await this.userRepository.create(userDto);
-      if (user) {
-        return {
-          user,
-          msg: 'User created',
-        };
-      }
-    } catch (err) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
+    const user = await this.userRepository.create(userDto);
+    const role = await this.rolesService.getRoleByValue(0);
+    await user.$set('roles', [role.id]);
+    user.roles = [role];
+    return user;
   }
 
   async getAll() {
-    return this.userRepository.findAll();
+    return this.userRepository.findAll({ include: { all: true } });
   }
 
   async getOne(id: number) {
@@ -54,5 +50,12 @@ export class UsersService {
     } catch (err) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
+  }
+
+  async getUsersByEmail(email: string) {
+    return await this.userRepository.findOne({
+      where: { email },
+      include: { all: true },
+    });
   }
 }
