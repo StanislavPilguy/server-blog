@@ -29,6 +29,8 @@
     "@nestjs/sequelize": "^8.0.0",
     "@nestjs/swagger": "^5.1.5",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.2",
     "cross-env": "^7.0.3",
     "dotenv": "^11.0.0",
     "pg": "^8.7.1",
