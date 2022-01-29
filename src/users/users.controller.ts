@@ -41,7 +41,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Issue a role' })
   @ApiResponse({ status: 200 })
-  @Roles('1')
+  @Roles('1', '3')
   @UseGuards(RolesGuard)
   @Post('/role')
   addRole(@Body() addRoleDto: AddRoleDto) {

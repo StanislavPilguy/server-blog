@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -13,6 +14,8 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { CategoriesService } from './categories.service';
 import { Category } from './categories.model';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { Roles } from '../auth/roles-auth.decorator';
+import { RolesGuard } from '../auth/roles.guard';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -20,6 +23,8 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
   @ApiOperation({ summary: 'Create category' })
   @ApiResponse({ status: 200, type: Category })
+  @Roles('1', '3')
+  @UseGuards(RolesGuard)
   @Post()
   createCategory(@Body() createCategory: CreateCategoryDto) {
     return this.categoriesService.create(createCategory);
@@ -34,6 +39,8 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Get one category' })
   @ApiResponse({ status: 200, type: Category })
+  @Roles('1', '3')
+  @UseGuards(RolesGuard)
   @Get(':id')
   getOneCategory(@Param('id') id: number) {
     return this.categoriesService.getOneCategory(id);
@@ -41,6 +48,8 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Update one category' })
   @ApiResponse({ status: 200, type: Category })
+  @Roles('1', '3')
+  @UseGuards(RolesGuard)
   @Put(':id')
   replaceCategory(
     @Param('id') id: number,
@@ -51,6 +60,8 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Delete category' })
   @ApiResponse({ status: 200, type: Category })
+  @Roles('1', '3')
+  @UseGuards(RolesGuard)
   @Delete(':id')
   destroy(@Param('id') id: number) {
     return this.categoriesService.delete(id);
