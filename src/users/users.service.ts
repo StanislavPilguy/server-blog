@@ -24,7 +24,7 @@ export class UsersService {
   }
 
   async getAll() {
-    return this.userRepository.findAll({ include: { all: true } });
+    return await this.userRepository.findAll({ include: { all: true } });
   }
 
   async getOne(id: number) {
