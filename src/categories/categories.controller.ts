@@ -49,6 +49,8 @@ export class CategoriesController {
     return this.categoriesService.replaceCategory(id, updateCategory);
   }
 
+  @ApiOperation({ summary: 'Delete category' })
+  @ApiResponse({ status: 200, type: Category })
   @Delete(':id')
   destroy(@Param('id') id: number) {
     return this.categoriesService.delete(id);
