@@ -10,6 +10,7 @@ import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/categories.model';
+import { SubcategoriesModule } from './subcategories/subcategories.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { Category } from './categories/categories.model';
     RolesModule,
     AuthModule,
     CategoriesModule,
+    SubcategoriesModule,
   ],
 })
 export class AppModule {}
