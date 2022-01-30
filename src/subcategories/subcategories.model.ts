@@ -26,11 +26,15 @@ export class Subcategory extends Model<Subcategory, CreateSubcategoryAttr> {
   })
   id: number;
 
-  @ApiProperty({ example: 'Fitness', description: 'Category name' })
+  @ApiProperty({
+    example: 'Title subcategory',
+    description: 'Subcategory name',
+  })
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
 
   @ForeignKey(() => Category)
+  @Column({ type: DataType.INTEGER })
   categoryId: number;
 
   @BelongsTo(() => Category)

@@ -39,7 +39,10 @@ export class CategoriesService {
       where: { id },
     });
     if (updatedCategory) {
-      return updatedCategory;
+      return {
+        updatedCategory,
+        msg: 'Update Category',
+      };
     }
     throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
   }

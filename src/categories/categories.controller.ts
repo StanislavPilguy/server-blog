@@ -23,7 +23,7 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
   @ApiOperation({ summary: 'Create category' })
   @ApiResponse({ status: 200, type: Category })
-  @Roles('1', '3')
+  @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Post()
   createCategory(@Body() createCategory: CreateCategoryDto) {
@@ -39,7 +39,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Get one category' })
   @ApiResponse({ status: 200, type: Category })
-  @Roles('1', '3')
+  @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Get(':id')
   getOneCategory(@Param('id') id: number) {
@@ -48,7 +48,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Update one category' })
   @ApiResponse({ status: 200, type: Category })
-  @Roles('1', '3')
+  @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Put(':id')
   replaceCategory(
@@ -60,7 +60,7 @@ export class CategoriesController {
 
   @ApiOperation({ summary: 'Delete category' })
   @ApiResponse({ status: 200, type: Category })
-  @Roles('1', '3')
+  @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Delete(':id')
   destroy(@Param('id') id: number) {
