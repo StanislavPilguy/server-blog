@@ -10,8 +10,8 @@ import { UserRoles } from './roles/user-roles.model';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { Category } from './categories/categories.model';
-import { SubcategoriesModule } from './subcategories/subcategories.module';
-import { Subcategory } from './subcategories/subcategories.model';
+import { PostsModule } from './posts/posts.module';
+import { Post } from './posts/posts.model';
 
 @Module({
   imports: [
@@ -25,14 +25,14 @@ import { Subcategory } from './subcategories/subcategories.model';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, Category, Subcategory],
+      models: [User, Role, UserRoles, Category, Post],
       autoLoadModels: true,
     }),
     UsersModule,
     RolesModule,
     AuthModule,
     CategoriesModule,
-    SubcategoriesModule,
+    PostsModule,
   ],
 })
 export class AppModule {}
