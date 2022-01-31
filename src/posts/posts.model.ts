@@ -11,8 +11,11 @@ import {
 import { User } from '../users/users.model';
 
 interface PostCreateAttr {
-  email: string;
-  password: string;
+  title: string;
+  description: string;
+  content: string;
+  image: string;
+  userId: number;
 }
 
 @Table({ tableName: 'posts' })
@@ -39,7 +42,7 @@ export class Post extends Model<Post, PostCreateAttr> {
   content: string;
 
   @ApiProperty({ example: 'Image', description: 'Post images' })
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.STRING })
   image: string;
 
   @ForeignKey(() => User)
