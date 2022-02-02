@@ -5,6 +5,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UsersModule } from '../users/users.module';
 import { CategoriesModule } from '../categories/categories.module';
+import { PostsModule } from '../posts/posts.module';
 
 @Module({
   controllers: [AuthController],
@@ -12,6 +13,7 @@ import { CategoriesModule } from '../categories/categories.module';
   imports: [
     forwardRef(() => UsersModule),
     forwardRef(() => CategoriesModule),
+    forwardRef(() => PostsModule),
     JwtModule.register({
       secret: process.env.PRIVATE_KEY || 'SECRET',
       signOptions: {

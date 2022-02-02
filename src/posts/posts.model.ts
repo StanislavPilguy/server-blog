@@ -14,8 +14,8 @@ interface PostCreateAttr {
   title: string;
   description: string;
   content: string;
-  image: string;
   userId: number;
+  image: string;
 }
 
 @Table({ tableName: 'posts' })
