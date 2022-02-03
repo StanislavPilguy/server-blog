@@ -9,6 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from '../users/users.model';
+import { Category } from '../categories/categories.model';
 
 interface PostCreateAttr {
   title: string;
@@ -49,6 +50,13 @@ export class Post extends Model<Post, PostCreateAttr> {
   @Column({ type: DataType.INTEGER })
   userId: number;
 
+  @ForeignKey(() => Category)
+  @Column({ type: DataType.INTEGER })
+  categoryId: number;
+
   @BelongsTo(() => User)
   user: User;
+
+  @BelongsTo(() => Category)
+  category: Category;
 }

@@ -34,6 +34,7 @@
     "class-validator": "^0.13.2",
     "cross-env": "^7.0.3",
     "dotenv": "^11.0.0",
+    "nestjs-sequelize-paginate": "^1.0.0",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.1.13",

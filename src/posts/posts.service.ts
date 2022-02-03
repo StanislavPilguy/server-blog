@@ -32,8 +32,24 @@ export class PostsService {
     }
   }
 
-  async getAll() {
-    return await this.postRepository.findAll();
+  async getAll(res) {
+    // eslint-disable-next-line prefer-const
+    let { categoryId, limit, page } = res.query;
+    page = page || 1;
+    limit = limit || 9;
+    const offset = page * limit - limit;
+    let post;
+    if (!categoryId) {
+      post = await this.postRepository.findAndCountAll({ limit, offset });
+    }
+    if (categoryId) {
+      post = await this.postRepository.findAndCountAll({
+        where: { categoryId },
+        limit,
+        offset,
+      });
+    }
+    return post;
   }
 
   async getOne(id: number) {

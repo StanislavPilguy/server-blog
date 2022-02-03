@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Req,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -18,6 +19,7 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { Request } from 'express';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -37,8 +39,8 @@ export class PostsController {
   @ApiOperation({ summary: 'Get all post' })
   @ApiResponse({ status: 200, type: [Post] })
   @Get()
-  getAllPost() {
-    return this.postsService.getAll();
+  async getAllPost(@Req() request: Request) {
+    return await this.postsService.getAll(request);
   }
 
   @ApiOperation({ summary: 'Get one post' })
