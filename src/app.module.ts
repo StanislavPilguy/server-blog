@@ -14,6 +14,7 @@ import { Category } from './categories/categories.model';
 import { PostsModule } from './posts/posts.module';
 import { Post } from './posts/posts.model';
 import { FilesModule } from './files/files.module';
+import { SearchModule } from './search/search.module';
 import * as path from 'path';
 
 @Module({
@@ -40,6 +41,7 @@ import * as path from 'path';
     CategoriesModule,
     PostsModule,
     FilesModule,
+    SearchModule,
   ],
 })
 export class AppModule {}
