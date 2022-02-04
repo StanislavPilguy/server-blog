@@ -7,7 +7,6 @@ import { ElasticsearchModule } from '@nestjs/elasticsearch';
       node: 'http://localhost:9200',
     }),
   ],
-  providers: [],
   exports: [ElasticsearchModule],
 })
 export class SearchModule {}
