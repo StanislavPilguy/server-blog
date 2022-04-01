@@ -24,7 +24,7 @@ export class PostsService {
       if (post) {
         return {
           post,
-          msg: 'Create post success',
+          massage: 'Create post success',
         };
       }
     } catch (err) {
@@ -63,7 +63,7 @@ export class PostsService {
       if (updatedPost) {
         return {
           updatedPost,
-          msg: 'Update Post success',
+          massage: 'Update Post success',
         };
       }
     } catch (err) {
@@ -76,7 +76,7 @@ export class PostsService {
       const del = await this.postRepository.destroy({ where: { id } });
       if (del) {
         return {
-          msg: 'Delete post success',
+          massage: 'Delete post success',
         };
       }
     } catch (err) {

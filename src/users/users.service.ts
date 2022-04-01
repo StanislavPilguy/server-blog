@@ -45,7 +45,7 @@ export class UsersService {
       const del = await this.userRepository.destroy({ where: { id } });
       if (del) {
         return {
-          msg: 'User delete',
+          massage: 'User delete',
         };
       }
     } catch (err) {

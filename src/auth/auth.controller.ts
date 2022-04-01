@@ -16,7 +16,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Log-in user' })
   @ApiResponse({ status: 201, type: User })
   @Roles('1', '2')
-  @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseGuards(RolesGuard, JwtAuthGuard)
   @Post('/log-in')
   login(@Body() userDto: CreateUserDto) {
     return this.authService.login(userDto);
