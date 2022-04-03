@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { CreateUserDto } from '../users/dto/create-user.dto';
@@ -11,11 +11,14 @@ import { User } from '../users/users.model';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  // @ts-ignore
+  // @ts-ignore
   @ApiOperation({ summary: 'Log-in user' })
   @ApiResponse({ status: 201, type: User })
   @Post('/log-in')
-  login(@Body() userDto: CreateUserDto) {
-    return this.authService.login(userDto);
+
+  async login(@Body() userDto: CreateUserDto) {
+    return await this.authService.login(userDto);
   }
 
   @ApiOperation({ summary: 'Registration user' })
