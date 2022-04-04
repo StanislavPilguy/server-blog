@@ -47,6 +47,9 @@ export class PostsService {
         where: { categoryId },
         limit,
         offset,
+        order: [
+          ['date', 'ASC']
+        ]
       });
     }
     return post;
