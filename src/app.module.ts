@@ -15,7 +15,9 @@ import { PostsModule } from './posts/posts.module';
 import { Post } from './posts/posts.model';
 import { FilesModule } from './files/files.module';
 import { SearchModule } from './search/search.module';
+import { AdminCategoriesModule } from './admin-categories/admin-categories.module';
 import * as path from 'path';
+import {AdminCategories} from "./admin-categories/admin-categories.model";
 
 @Module({
   imports: [
@@ -29,7 +31,7 @@ import * as path from 'path';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles, Category, Post],
+      models: [User, Role, UserRoles, Category, Post, AdminCategories],
       autoLoadModels: true,
     }),
     ServeStaticModule.forRoot({
@@ -42,6 +44,7 @@ import * as path from 'path';
     PostsModule,
     FilesModule,
     SearchModule,
+    AdminCategoriesModule,
   ],
 })
 export class AppModule {}
