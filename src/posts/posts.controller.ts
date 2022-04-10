@@ -50,6 +50,13 @@ export class PostsController {
     return this.postsService.getOne(id);
   }
 
+  @ApiOperation({ summary: 'Get one post' })
+  @ApiResponse({ status: 200, type: Post })
+  @Get('/name/:name')
+  getOnePostByName(@Param('name') name: string) {
+    return this.postsService.getOneByNane(name);
+  }
+
   @ApiOperation({ summary: 'Update one post' })
   @ApiResponse({ status: 200, type: Post })
   @Roles('1', '2')

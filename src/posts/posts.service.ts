@@ -28,6 +28,7 @@ export class PostsService {
         };
       }
     } catch (err) {
+      console.log(err )
       throw new HttpException('Not found Post', HttpStatus.NOT_FOUND);
     }
   }
@@ -54,6 +55,11 @@ export class PostsService {
       });
     }
     return post;
+  }
+
+  async getOneByNane(name: string) {
+    // @ts-ignore
+    return this.postRepository.findOne({ where: { title: name } });
   }
 
   async getOne(id: number) {

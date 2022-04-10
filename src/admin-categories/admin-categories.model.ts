@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {Column, DataType, Model, Table} from 'sequelize-typescript';
 import {ApiProperty} from "@nestjs/swagger";
 
 export interface CreateAdminCategoriesDtoAttr {
@@ -20,4 +20,5 @@ export class AdminCategories extends Model<AdminCategories, CreateAdminCategorie
     @ApiProperty({example: 'categories', description: 'Admin Category name'})
     @Column({type: DataType.STRING, unique: true, allowNull: false})
     name: string;
+
 }

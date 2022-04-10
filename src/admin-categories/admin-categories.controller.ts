@@ -26,8 +26,6 @@ export class AdminCategoriesController {
 
     @ApiOperation({ summary: 'Get all the category' })
     @ApiResponse({ status: 200, type: [AdminCategories] })
-    @Roles('1', '2')
-    @UseGuards(RolesGuard)
     @Get()
     getAllAdminCategory() {
         return this.adminCategories.getAll();
