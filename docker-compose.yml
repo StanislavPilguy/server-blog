@@ -1,111 +1,11 @@
-version: '3.0'
+version: '3.8'
+
 services:
-  main:
-    container_name: main
-    build:
-      context: .
-    env_file:
-      - .development.env
-    volumes:
-      - .:/app
-      - /app/node_modules
+  dev-db-pg:
+    image: postgres:13
     ports:
-      - 5000:5000
-      - 9229:9229
-    command: npm run start:dev
-    depends_on:
-      - postgres
-    restart: always
-  postgres:
-    container_name: postgres
-    image: postgres:latest
-    env_file:
-      - .development.env
+      - 5432:5432
     environment:
-      PG_DATA: /var/lib/postgresql/14
-    ports:
-     - 5432:5432
-    volumes:
-      - pgdata:/var/lib/postgresql/14
-    restart: always
-
-  pgadmin:
-    links:
-       - postgres:postgres
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    ports:
-        - "8080:80"
-    volumes:
-        - /data/pgadmin:/root/.pgadmin
-    env_file:
-        - .development.env
-  es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    container_name: es01
-    environment:
-      - node.name=es01
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es02,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data01:/usr/share/elasticsearch/data
-    ports:
-      - 9200:9200
-    networks:
-      - elastic
-  es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    container_name: es02
-    environment:
-      - node.name=es02
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es03
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data02:/usr/share/elasticsearch/data
-    networks:
-      - elastic
-  es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
-    container_name: es03
-    environment:
-      - node.name=es03
-      - cluster.name=es-docker-cluster
-      - discovery.seed_hosts=es01,es02
-      - cluster.initial_master_nodes=es01,es02,es03
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data03:/usr/share/elasticsearch/data
-    networks:
-      - elastic
-
-volumes:
-  pgdata:
-  data01:
-    driver: local
-  data02:
-    driver: local
-  data03:
-    driver: local
-
-networks:
-  elastic:
-    driver: bridge
+      POSTGRES_USER: blog
+      POSTGRES_PASSWORD: blog
+      POSTGRES_DB: blog
