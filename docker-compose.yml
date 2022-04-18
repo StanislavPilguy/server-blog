@@ -6,7 +6,7 @@ services:
     working_dir: '/home/dev-node'
     volumes:
       - ./:/home/dev-node
-    command: "sh -c 'npm i && npm run build && npm run start:prod ' "
+    command: "sh -c 'npm install && npm run build && npm run start:prod ' "
     depends_on:
       - dev-db-pg
     environment:
