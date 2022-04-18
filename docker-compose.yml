@@ -1,6 +1,23 @@
-version: '3.8'
+version: '3.9'
 
 services:
+  dev-node:
+    image: 'node:17-alpine3.14'
+    working_dir: '/home/dev-node'
+    volumes:
+      - ./:/home/dev-node
+    command: "sh -c 'npm i && npm run build && npm run start:prod ' "
+    depends_on:
+      - dev-db-pg
+    environment:
+      NODE_ENV: development
+      POSTGRES_HOST: dev-db-pg
+      POSTGRES_USER: blog
+      POSTGRES_PASSWORD: blog
+      POSTGRES_DB: blog
+      PRIVATE_KEY: secret_key_PRIvate
+    ports:
+      - 5000:5000
   dev-db-pg:
     image: postgres:13
     ports:
