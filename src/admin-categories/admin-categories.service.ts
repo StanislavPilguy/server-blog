@@ -42,7 +42,7 @@ export class AdminCategoriesService {
         if (updatedCategory) {
             return {
                 updatedCategory,
-                massage: 'Update Admin Category',
+                message: 'Update Admin Category',
             };
         }
         throw new HttpException('Admin Category not found', HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ export class AdminCategoriesService {
             const del = await this.adminCategoriesRepository.destroy({ where: { id } });
             if (del) {
                 return {
-                    massage: 'Delete admin category',
+                    message: 'Delete admin category',
                 };
             }
         } catch (err) {
