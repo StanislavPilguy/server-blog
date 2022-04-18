@@ -34,7 +34,6 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.2",
-    "cross-env": "^7.0.3",
     "dotenv": "^11.0.0",
     "nestjs-sequelize-paginate": "^1.0.0",
     "pg": "^8.7.1",
