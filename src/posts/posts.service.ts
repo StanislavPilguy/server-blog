@@ -24,11 +24,10 @@ export class PostsService {
       if (post) {
         return {
           post,
-          massage: 'Create post success',
+          message: 'Create post success',
         };
       }
     } catch (err) {
-      console.log(err )
       throw new HttpException('Not found Post', HttpStatus.NOT_FOUND);
     }
   }
@@ -73,7 +72,7 @@ export class PostsService {
       if (updatedPost) {
         return {
           updatedPost,
-          massage: 'Update Post success',
+          message: 'Update Post success',
         };
       }
     } catch (err) {
@@ -86,7 +85,7 @@ export class PostsService {
       const del = await this.postRepository.destroy({ where: { id } });
       if (del) {
         return {
-          massage: 'Delete post success',
+          message: 'Delete post success',
         };
       }
     } catch (err) {
