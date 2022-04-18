@@ -17,7 +17,7 @@ export class RolesService {
       if (role) {
         return {
           role,
-          massage: 'Role created',
+          message: 'Role created',
         };
       }
     } catch (err) {
