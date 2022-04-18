@@ -41,7 +41,7 @@ export class CategoriesService {
     if (updatedCategory) {
       return {
         updatedCategory,
-        massage: 'Update Category',
+        message: 'Update Category',
       };
     }
     throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
@@ -52,7 +52,7 @@ export class CategoriesService {
       const del = await this.categoryRepository.destroy({ where: { id } });
       if (del) {
         return {
-          massage: 'Delete category',
+          message: 'Delete category',
         };
       }
     } catch (err) {
