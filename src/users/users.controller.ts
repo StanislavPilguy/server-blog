@@ -32,8 +32,6 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Get users' })
   @ApiResponse({ status: 200, type: [User] })
-  @Roles('1')
-  @UseGuards(RolesGuard)
   @Get()
   getAllUsers() {
     return this.usersService.getAll();
@@ -41,7 +39,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Issue a role' })
   @ApiResponse({ status: 200 })
-  @Roles('1', '2')
+  @Roles('1')
   @UseGuards(RolesGuard)
   @Post('/role')
   addRole(@Body() addRoleDto: AddRoleDto) {
