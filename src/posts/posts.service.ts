@@ -5,6 +5,8 @@ import { CreatePostDto } from './dto/create-post.dto';
 import { Post } from './posts.model';
 import { FilesService } from '../files/files.service';
 import { UpdatePostDto } from './dto/update-post.dto';
+import {Category} from "../categories/categories.model";
+import {User} from "../users/users.model";
 
 @Injectable()
 export class PostsService {
@@ -40,16 +42,19 @@ export class PostsService {
     const offset = page * limit - limit;
     let post;
     if (!categoryId) {
-      post = await this.postRepository.findAndCountAll({ limit, offset });
+      post = await this.postRepository.findAndCountAll({ limit, offset, include: [
+          { model: Category },
+          { model: User }
+        ] });
     }
     if (categoryId) {
       post = await this.postRepository.findAndCountAll({
         where: { categoryId },
         limit,
         offset,
-        attributes: ['createdAt'],
-        order: [
-          ['createdAt', 'DESC']
+        include: [
+          { model: Category },
+          { model: User }
         ]
       });
     }

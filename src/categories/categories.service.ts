@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './categories.model';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import {Post} from "../posts/posts.model";
 
 @Injectable()
 export class CategoriesService {
@@ -26,7 +27,9 @@ export class CategoriesService {
   }
 
   async getAll() {
-    return await this.categoryRepository.findAll();
+    return await this.categoryRepository.findAll({
+      include: Post
+    });
   }
 
   async getOneCategory(id: number) {

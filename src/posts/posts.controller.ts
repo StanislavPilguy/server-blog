@@ -49,7 +49,6 @@ export class PostsController {
   getOnePost(@Param('id') id: number) {
     return this.postsService.getOne(id);
   }
-
   @ApiOperation({ summary: 'Get one post' })
   @ApiResponse({ status: 200, type: Post })
   @Get('/name/:name')
