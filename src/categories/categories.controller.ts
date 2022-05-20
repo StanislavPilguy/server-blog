@@ -66,4 +66,15 @@ export class CategoriesController {
   destroy(@Param('id') id: number) {
     return this.categoriesService.delete(id);
   }
+
+
+  @ApiOperation({ summary: 'Delete categories everising ' })
+  @ApiResponse({ status: 200, type: [Number] })
+  @Roles('1', '2')
+  @UseGuards(RolesGuard)
+  @Post('del')
+  delAll(@Body() categories: number[]) {
+    return this.categoriesService.deleteAll(categories)
+  }
+
 }

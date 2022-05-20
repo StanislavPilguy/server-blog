@@ -62,4 +62,9 @@ export class CategoriesService {
       throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
     }
   }
+
+  async deleteAll(categories: number[]) {
+    return await this.categoryRepository.destroy({ where: { id: categories } })
+  }
+
 }
