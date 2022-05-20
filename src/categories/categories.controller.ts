@@ -69,7 +69,7 @@ export class CategoriesController {
 
 
   @ApiOperation({ summary: 'Delete categories everising ' })
-  @ApiResponse({ status: 200, type: [Number] })
+  @ApiResponse({ status: 200, type: Category})
   @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Post('del')
