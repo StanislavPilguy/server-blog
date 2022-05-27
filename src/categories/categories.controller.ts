@@ -23,8 +23,6 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
   @ApiOperation({ summary: 'Create category' })
   @ApiResponse({ status: 200, type: Category })
-  @Roles('1', '2')
-  @UseGuards(RolesGuard)
   @Post()
   createCategory(@Body() createCategory: CreateCategoryDto) {
     return this.categoriesService.create(createCategory);
