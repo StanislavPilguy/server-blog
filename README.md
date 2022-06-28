@@ -1,5 +1,5 @@
 # Swagger UI 
-- http://113.30.190.164:5000/api/docs/
+- http://81.28.6.88:5000/api/docs
 
 
 # I use: 
