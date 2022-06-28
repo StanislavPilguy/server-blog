@@ -12,7 +12,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './users.model';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
@@ -56,8 +55,10 @@ export class UsersController {
   @ApiOperation({ summary: 'Update one user' })
   @ApiResponse({ status: 200, type: User })
   @Put(':id')
-  replaceUser(@Body() updateDto: UpdateUserDto, @Param('id') id: number) {
-    return this.usersService.replaceUser(id, updateDto);
+  updateUser(@Body() updateDto: CreateUserDto,
+  @Param('id') id: number
+  ) {
+    return this.usersService.updateUser(id, updateDto);
   }
 
   @ApiOperation({ summary: 'Delete one user' })

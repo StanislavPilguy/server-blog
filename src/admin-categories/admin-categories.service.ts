@@ -34,18 +34,17 @@ export class AdminCategoriesService {
         return await this.adminCategoriesRepository.findAll({ where: { id } });
     }
 
-    async replaceAdminCategory(id: number, updateAdminCategories: UpdateAdminCategoriesDto) {
-        await this.adminCategoriesRepository.upsert(updateAdminCategories);
-        const updatedCategory = await this.adminCategoriesRepository.findOne({
-            where: { id },
-        });
-        if (updatedCategory) {
-            return {
-                updatedCategory,
-                message: 'Update Admin Category',
-            };
-        }
-        throw new HttpException('Admin Category not found', HttpStatus.NOT_FOUND);
+    async updateAdminCategory(id: number, updateAdminCategories: UpdateAdminCategoriesDto) {
+      try {
+          await this.adminCategoriesRepository.upsert(updateAdminCategories);
+          await this.adminCategoriesRepository.findOne({ where: { id } });
+          return {
+              updateAdminCategories,
+              message: 'update admin category success!',
+          }
+      } catch (err) {
+          throw new HttpException('Admin Category not found', HttpStatus.NOT_FOUND);
+      }
     }
 
     async delete(id: number) {

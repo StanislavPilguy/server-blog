@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/sequelize';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './users.model';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { RolesService } from '../roles/roles.service';
 import { AddRoleDto } from './dto/add-role.dto';
 
@@ -17,7 +16,7 @@ export class UsersService {
 
   async create(userDto: CreateUserDto) {
     const user = await this.userRepository.create(userDto);
-    const role = await this.rolesService.getRoleByValue('0');
+    const role = await this.rolesService.getRoleByValue('1');
     await user.$set('roles', [role.id]);
     user.roles = [role];
     return user;
@@ -31,13 +30,17 @@ export class UsersService {
     return this.userRepository.findAll({ where: { id } });
   }
 
-  async replaceUser(id: number, userUpdate: UpdateUserDto) {
-    await this.userRepository.upsert(userUpdate);
-    const updatedUser = await this.userRepository.findOne({ where: { id } });
-    if (updatedUser) {
-      return updatedUser;
+  async updateUser(id: number, userUpdate: CreateUserDto) {
+    try {
+      await this.userRepository.upsert(userUpdate);
+      await this.userRepository.findOne({ where: { id } });
+      return {
+        userUpdate,
+        message: 'update user success!'
+      }
+    } catch (err) {
+      throw new HttpException('user not found', HttpStatus.NOT_FOUND);
     }
-    throw new HttpException('User not found', HttpStatus.NOT_FOUND);
   }
 
   async delete(id: number) {
@@ -45,7 +48,7 @@ export class UsersService {
       const del = await this.userRepository.destroy({ where: { id } });
       if (del) {
         return {
-          message: 'User delete',
+          message: 'User delete success!',
         };
       }
     } catch (err) {

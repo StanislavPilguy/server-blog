@@ -13,7 +13,6 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { CategoriesService } from './categories.service';
 import { Category } from './categories.model';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Roles } from '../auth/roles-auth.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 
@@ -49,11 +48,11 @@ export class CategoriesController {
   @Roles('1', '2')
   @UseGuards(RolesGuard)
   @Put(':id')
-  replaceCategory(
+  updateCategory(
     @Param('id') id: number,
-    @Body() updateCategory: UpdateCategoryDto,
+    @Body() updateCategory: CreateCategoryDto
   ) {
-    return this.categoriesService.replaceCategory(id, updateCategory);
+    return this.categoriesService.updateCategory(id, updateCategory);
   }
 
   @ApiOperation({ summary: 'Delete category' })

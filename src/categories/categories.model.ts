@@ -24,4 +24,6 @@ export class Category extends Model<Category, CreateCategoryAttr> {
 
   @HasMany(() => Post)
   posts: Post[];
+
+
 }

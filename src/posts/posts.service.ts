@@ -70,15 +70,13 @@ export class PostsService {
     return this.postRepository.findOne({ where: { id } });
   }
 
-  async replacePost(id: number, updatePostDto: UpdatePostDto) {
+  async updatePost(id: number, updatePostDto: UpdatePostDto) {
     try {
       await this.postRepository.upsert(updatePostDto);
-      const updatedPost = await this.postRepository.findOne({ where: { id } });
-      if (updatedPost) {
-        return {
-          updatedPost,
-          message: 'Update Post success',
-        };
+      await this.postRepository.findOne({ where: { id } });
+      return {
+        updatePostDto,
+        message: 'Update Post success',
       }
     } catch (err) {
       throw new HttpException('Not found Post', HttpStatus.NOT_FOUND);

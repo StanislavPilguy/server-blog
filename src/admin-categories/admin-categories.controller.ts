@@ -45,11 +45,11 @@ export class AdminCategoriesController {
     @Roles('1', '2')
     @UseGuards(RolesGuard)
     @Put(':id')
-    replaceCategory(
+    updateCategory(
         @Param('id') id: number,
         @Body() updateAdminCategories: UpdateAdminCategoriesDto,
     ) {
-        return this.adminCategories.replaceAdminCategory(id, updateAdminCategories)
+        return this.adminCategories.updateAdminCategory(id, updateAdminCategories)
     }
 
     @ApiOperation({ summary: 'Delete admin category' })

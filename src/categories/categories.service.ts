@@ -3,7 +3,6 @@ import { InjectModel } from '@nestjs/sequelize';
 
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { Category } from './categories.model';
-import { UpdateCategoryDto } from './dto/update-category.dto';
 import {Post} from "../posts/posts.model";
 
 @Injectable()
@@ -36,19 +35,20 @@ export class CategoriesService {
     return await this.categoryRepository.findAll({ where: { id } });
   }
 
-  async replaceCategory(id: number, updateCategory: UpdateCategoryDto) {
-    await this.categoryRepository.upsert(updateCategory);
-    const updatedCategory = await this.categoryRepository.findOne({
-      where: { id },
-    });
-    if (updatedCategory) {
+  async updateCategory(id: number, updateCategory: CreateCategoryDto) {
+    try {
+      await this.categoryRepository.upsert(updateCategory);
+      await this.categoryRepository.findOne({where: { id }})
       return {
-        updatedCategory,
-        message: 'Update Category',
-      };
+        updateCategory,
+        message: 'Update category name success'
+      }
+    } catch (err) {
+      throw new HttpException('Not found Post', HttpStatus.NOT_FOUND);
     }
-    throw new HttpException('Category not found', HttpStatus.NOT_FOUND);
   }
+
+
 
   async delete(id: number) {
     try {
